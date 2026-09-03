@@ -1,63 +1,674 @@
-noBtn.addEventListener("click", function () {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    // Show the next cute message
-    const message = messages[noClickCount % messages.length];
-    showMessage(message);
+    <title>For Shruti ❤️</title>
 
-    // Change button text
-    noBtn.textContent =
-        buttonTexts[Math.min(noClickCount, buttonTexts.length - 1)];
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    // Move the button somewhere else
-    moveNoButton();
+        body {
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #ffd6e7, #ffe9d6, #fff0f5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
 
-    // Make YES button slightly bigger
-    const currentScale =
-        1 + Math.min(noClickCount * 0.04, 0.25);
+        /* Main Card */
+        .card {
+            width: 90%;
+            max-width: 550px;
+            background: rgba(255, 255, 255, 0.94);
+            border-radius: 30px;
+            padding: 45px 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 10;
+        }
 
-    yesBtn.style.transform = `scale(${currentScale})`;
+        .heart {
+            font-size: 55px;
+            animation: heartbeat 1.5s infinite;
+            margin-bottom: 10px;
+        }
 
-    noClickCount++;
-});
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        h1 {
+            color: #e75480;
+            font-size: 38px;
+            margin-bottom: 18px;
+        }
+
+        .message {
+            color: #555;
+            font-size: 17px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .date {
+            display: inline-block;
+            background: #fff0f5;
+            color: #d6336c;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 10px 0 25px;
+        }
+
+        .question {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+            position: relative;
+            min-height: 60px;
+        }
+
+        button {
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        #yesBtn {
+            background: #e75480;
+            color: white;
+            box-shadow: 0 8px 20px rgba(231, 84, 128, 0.35);
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 25px rgba(231, 84, 128, 0.45);
+        }
+
+        #noBtn {
+            background: #eeeeee;
+            color: #555;
+            position: relative;
+            z-index: 100;
+        }
+
+        #noBtn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Cute response message */
+        #responseMessage {
+            margin-top: 25px;
+            min-height: 30px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #d6336c;
+        }
+
+        /* Success screen */
+        #successScreen {
+            display: none;
+        }
+
+        #successScreen h1 {
+            font-size: 40px;
+        }
+
+        .success-text {
+            color: #555;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-top: 15px;
+        }
+
+        .date-big {
+            font-size: 28px;
+            color: #e75480;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        /* Floating hearts */
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 25px;
+            opacity: 0.7;
+            animation: floatUp linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -20px;
+            z-index: 999;
+            pointer-events: none;
+            animation: confettiFall 3s linear forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(720deg);
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            .card {
+                width: 92%;
+                padding: 35px 22px;
+                border-radius: 25px;
+            }
+
+            .heart {
+                font-size: 45px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .message {
+                font-size: 15px;
+            }
+
+            .question {
+                font-size: 21px;
+            }
+
+            button {
+                padding: 12px 22px;
+                font-size: 15px;
+            }
+
+            .date {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating Hearts -->
+    <div class="floating-heart" style="left: 5%; animation-duration: 8s;">❤️</div>
+    <div class="floating-heart" style="left: 15%; animation-duration: 10s; animation-delay: 2s;">💕</div>
+    <div class="floating-heart" style="left: 30%; animation-duration: 7s; animation-delay: 1s;">💗</div>
+    <div class="floating-heart" style="left: 50%; animation-duration: 11s; animation-delay: 3s;">❤️</div>
+    <div class="floating-heart" style="left: 70%; animation-duration: 9s; animation-delay: 1s;">💕</div>
+    <div class="floating-heart" style="left: 85%; animation-duration: 8s; animation-delay: 4s;">💗</div>
+
+    <!-- Main Card -->
+    <div class="card">
+
+        <!-- Invitation Screen -->
+        <div id="invitationScreen">
+
+            <div class="heart">❤️</div>
+
+            <h1>Hey Shruti ❤️</h1>
+
+            <p class="message">
+                I know the last few days have probably been a lot.
+                So I thought maybe we could forget everything for a while,
+                relax, have some good food, good drinks,
+                and just enjoy some peaceful time together. 🥂
+            </p>
+
+            <div class="date">
+                📅 11 September 2026
+            </div>
+
+            <p class="question">
+                So... Daru Date? 🍷❤️
+            </p>
+
+            <div class="buttons">
+
+                <button id="yesBtn">
+                    YES ❤️
+                </button>
+
+                <button id="noBtn">
+                    NO 😶
+                </button>
+
+            </div>
+
+            <div id="responseMessage"></div>
+
+        </div>
 
 
-function moveNoButton() {
+        <!-- Success Screen -->
+        <div id="successScreen">
 
-    // Make the button independent of the normal layout
-    noBtn.style.position = "fixed";
+            <div class="heart">🥂</div>
 
-    // Button dimensions
-    const buttonWidth = noBtn.offsetWidth;
-    const buttonHeight = noBtn.offsetHeight;
+            <h1>It's a Date! 🎉</h1>
 
-    // Safe area around the screen edges
-    const padding = 25;
+            <div class="date-big">
+                11 September 2026 ❤️
+            </div>
 
-    // Available screen space
-    const maxX =
-        window.innerWidth - buttonWidth - padding;
+            <p class="success-text">
+                You + Me + Drinks + Food 🍷🍕
+                <br><br>
+                Good conversations.
+                <br>
+                Lots of laughs.
+                <br>
+                And absolutely no unnecessary drama. 😌
+                <br><br>
+                I can't wait, Shruti. ❤️🥂
+            </p>
 
-    const maxY =
-        window.innerHeight - buttonHeight - padding;
+        </div>
 
-    // Generate completely random coordinates
-    const randomX =
-        padding + Math.random() * (maxX - padding);
+    </div>
 
-    const randomY =
-        padding + Math.random() * (maxY - padding);
 
-    // Smooth movement
-    noBtn.style.transition =
-        "left 0.4s ease, top 0.4s ease, transform 0.2s ease";
+    <script>
 
-    noBtn.style.left = randomX + "px";
-    noBtn.style.top = randomY + "px";
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
 
-    // Little bounce
-    noBtn.style.transform = "scale(1.15)";
+        const invitationScreen =
+            document.getElementById("invitationScreen");
 
-    setTimeout(() => {
-        noBtn.style.transform = "scale(1)";
-    }, 200);
-}
+        const successScreen =
+            document.getElementById("successScreen");
+
+        const responseMessage =
+            document.getElementById("responseMessage");
+
+
+        /* =========================
+           NO BUTTON MESSAGES
+        ========================= */
+
+        const messages = [
+
+            "Are you sure you want to avoid me? 🥺",
+
+            "Sukoon nahi chahiye? 😭",
+
+            "11 September ko ek drink bhi mere saath nahi? 🍷🥺",
+
+            "Itna bhaav? 😤❤️",
+
+            "Mere saath thoda sa time spend kar lo na... 🥺",
+
+            "Okay Shruti... think again? 👉👈❤️",
+
+            "Last chance... Daru Date? 🍷❤️",
+
+            "Achhaaa... NO button hi dabaogi? 😭",
+
+            "Main itni easily haar maannewala nahi hoon 😌❤️",
+
+            "Ek YES kar do na... pleaseee 🥺❤️"
+
+        ];
+
+
+        const buttonTexts = [
+
+            "Really? 🥺",
+
+            "Still no? 😭",
+
+            "Think again ❤️",
+
+            "Maybe? 🥺",
+
+            "Come on 😭",
+
+            "Please? 👉👈",
+
+            "Last chance ❤️",
+
+            "Seriously? 😭",
+
+            "Nooo 😩",
+
+            "YES kar do ❤️"
+
+        ];
+
+
+        let noClickCount = 0;
+
+
+        /* =========================
+           YES BUTTON
+        ========================= */
+
+        yesBtn.addEventListener("click", function () {
+
+            invitationScreen.style.display = "none";
+
+            successScreen.style.display = "block";
+
+            createConfetti();
+
+        });
+
+
+        /* =========================
+           NO BUTTON
+        ========================= */
+
+        noBtn.addEventListener("click", function () {
+
+            /* Show cute message */
+
+            const message =
+                messages[noClickCount % messages.length];
+
+            responseMessage.textContent = message;
+
+
+            /* Change NO button text */
+
+            noBtn.textContent =
+                buttonTexts[
+                    Math.min(
+                        noClickCount,
+                        buttonTexts.length - 1
+                    )
+                ];
+
+
+            /* Move NO button */
+
+            moveNoButton();
+
+
+            /* Make YES button bigger */
+
+            const currentScale =
+                1 + Math.min(noClickCount * 0.04, 0.25);
+
+            yesBtn.style.transform =
+                `scale(${currentScale})`;
+
+
+            noClickCount++;
+
+        });
+
+
+        /* =========================
+           MOVE NO BUTTON
+        ========================= */
+
+        function moveNoButton() {
+
+            /*
+                Make the NO button independent
+                from the normal layout.
+            */
+
+            noBtn.style.position = "fixed";
+
+
+            /* Get button dimensions */
+
+            const buttonWidth =
+                noBtn.offsetWidth;
+
+            const buttonHeight =
+                noBtn.offsetHeight;
+
+
+            /* Safe distance from screen edges */
+
+            const padding = 25;
+
+
+            /*
+                Calculate available screen area
+            */
+
+            const maxX =
+                window.innerWidth -
+                buttonWidth -
+                padding;
+
+            const maxY =
+                window.innerHeight -
+                buttonHeight -
+                padding;
+
+
+            /*
+                Generate random position
+            */
+
+            const randomX =
+                padding +
+                Math.random() *
+                (maxX - padding);
+
+            const randomY =
+                padding +
+                Math.random() *
+                (maxY - padding);
+
+
+            /*
+                Smooth movement
+            */
+
+            noBtn.style.transition =
+                "left 0.4s ease, top 0.4s ease, transform 0.2s ease";
+
+
+            noBtn.style.left =
+                randomX + "px";
+
+            noBtn.style.top =
+                randomY + "px";
+
+
+            /*
+                Little bounce
+            */
+
+            noBtn.style.transform =
+                "scale(1.15)";
+
+
+            setTimeout(function () {
+
+                noBtn.style.transform =
+                    "scale(1)";
+
+            }, 200);
+
+        }
+
+
+        /* =========================
+           CONFETTI
+        ========================= */
+
+        function createConfetti() {
+
+            const symbols = [
+                "❤️",
+                "💕",
+                "💗",
+                "🎉",
+                "🥂",
+                "✨",
+                "💖"
+            ];
+
+
+            for (let i = 0; i < 80; i++) {
+
+                const confetti =
+                    document.createElement("div");
+
+                confetti.classList.add("confetti");
+
+                confetti.textContent =
+                    symbols[
+                        Math.floor(
+                            Math.random() *
+                            symbols.length
+                        )
+                    ];
+
+
+                confetti.style.left =
+                    Math.random() * 100 + "vw";
+
+
+                confetti.style.animationDuration =
+                    (2 + Math.random() * 3) + "s";
+
+
+                confetti.style.animationDelay =
+                    Math.random() * 1.5 + "s";
+
+
+                confetti.style.fontSize =
+                    (12 + Math.random() * 18) + "px";
+
+
+                document.body.appendChild(confetti);
+
+
+                /*
+                    Remove confetti after animation
+                */
+
+                setTimeout(function () {
+
+                    confetti.remove();
+
+                }, 5000);
+
+            }
+
+        }
+
+
+        /* =========================
+           PREVENT NO BUTTON FROM
+           GOING OUTSIDE AFTER RESIZE
+        ========================= */
+
+        window.addEventListener("resize", function () {
+
+            if (noBtn.style.position === "fixed") {
+
+                const buttonWidth =
+                    noBtn.offsetWidth;
+
+                const buttonHeight =
+                    noBtn.offsetHeight;
+
+                const maxX =
+                    window.innerWidth -
+                    buttonWidth -
+                    20;
+
+                const maxY =
+                    window.innerHeight -
+                    buttonHeight -
+                    20;
+
+
+                let currentX =
+                    parseFloat(noBtn.style.left) || 20;
+
+                let currentY =
+                    parseFloat(noBtn.style.top) || 20;
+
+
+                currentX =
+                    Math.min(
+                        Math.max(currentX, 10),
+                        maxX
+                    );
+
+
+                currentY =
+                    Math.min(
+                        Math.max(currentY, 10),
+                        maxY
+                    );
+
+
+                noBtn.style.left =
+                    currentX + "px";
+
+                noBtn.style.top =
+                    currentY + "px";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
