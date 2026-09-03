@@ -1,551 +1,297 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>For Shruti ❤️</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-            overflow: hidden;
-            color: #333;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 45px 30px;
-            border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 10;
-        }
-
-        .heart {
-            font-size: 55px;
-            animation: heartbeat 1.5s infinite;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            font-size: 32px;
-            color: #d6336c;
-            margin-bottom: 15px;
-        }
-
-        h2 {
-            font-size: 25px;
-            color: #444;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 17px;
-            line-height: 1.7;
-            margin-bottom: 18px;
-        }
-
-        .highlight {
-            font-weight: bold;
-            color: #d6336c;
-        }
-
-        .date-box {
-            background: #fff0f3;
-            border: 2px solid #ffb3c1;
-            border-radius: 18px;
-            padding: 18px;
-            margin: 25px 0;
-        }
-
-        .date-box .date {
-            font-size: 25px;
-            font-weight: bold;
-            color: #d6336c;
-        }
-
-        .date-box .details {
-            margin-top: 8px;
-            font-size: 16px;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        button {
-            border: none;
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-size: 17px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            font-weight: 600;
-        }
-
-        #yesBtn {
-            background: #d6336c;
-            color: white;
-            box-shadow: 0 5px 15px rgba(214, 51, 108, 0.3);
-        }
-
-        #yesBtn:hover {
-            transform: scale(1.08);
-            background: #c2255c;
-        }
-
-        #noBtn {
-            background: #eee;
-            color: #555;
-        }
-
-        #noBtn:hover {
-            transform: scale(1.05);
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .cute-message {
-            margin-top: 20px;
-            font-size: 17px;
-            font-weight: 600;
-            color: #d6336c;
-            animation: appear 0.5s ease;
-        }
-
-        #success {
-            animation: appear 0.7s ease;
-        }
-
-        #success h1 {
-            font-size: 38px;
-        }
-
-        .success-date {
-            font-size: 28px;
-            color: #d6336c;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-
-        .success-details {
-            font-size: 18px;
-            line-height: 1.8;
-        }
-
-        .floating-heart {
-            position: absolute;
-            bottom: -50px;
-            font-size: 25px;
-            animation: floatUp linear infinite;
-            opacity: 0.7;
-            z-index: 1;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.2);
-            }
-        }
-
-        @keyframes appear {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes floatUp {
-            from {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-
-            15% {
-                opacity: 0.7;
-            }
-
-            100% {
-                transform: translateY(-110vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .confetti {
-            position: fixed;
-            top: -20px;
-            font-size: 24px;
-            z-index: 100;
-            pointer-events: none;
-            animation: confettiFall 3s linear forwards;
-        }
-
-        @keyframes confettiFall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(110vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .container {
-                padding: 35px 20px;
-            }
-
-            h1 {
-                font-size: 28px;
-            }
-
-            h2 {
-                font-size: 22px;
-            }
-
-            p {
-                font-size: 16px;
-            }
-
-            .date-box .date {
-                font-size: 22px;
-            }
-
-            button {
-                width: 100%;
-            }
-
-            .buttons {
-                flex-direction: column;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- Floating hearts -->
-    <div class="floating-heart" style="left: 5%; animation-duration: 8s; animation-delay: 0s;">❤️</div>
-    <div class="floating-heart" style="left: 15%; animation-duration: 10s; animation-delay: 2s;">💕</div>
-    <div class="floating-heart" style="left: 30%; animation-duration: 7s; animation-delay: 1s;">💗</div>
-    <div class="floating-heart" style="left: 50%; animation-duration: 11s; animation-delay: 3s;">❤️</div>
-    <div class="floating-heart" style="left: 70%; animation-duration: 8s; animation-delay: 1s;">💖</div>
-    <div class="floating-heart" style="left: 85%; animation-duration: 9s; animation-delay: 4s;">💕</div>
-    <div class="floating-heart" style="left: 95%; animation-duration: 7s; animation-delay: 2s;">❤️</div>
-
-
-    <div class="container">
-
-        <!-- Question -->
-        <div id="questionBox">
+<script>
 
-            <div class="heart">❤️</div>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
 
-            <h1>Hey Shruti ❤️</h1>
+    const questionBox = document.getElementById("questionBox");
+    const success = document.getElementById("success");
 
-            <p>
-                I know the last few days have probably been a lot.
-            </p>
+    const messageContainer =
+        document.getElementById("messageContainer");
 
-            <p>
-                So I thought maybe we could forget everything for a little while,
-                relax, have some drinks, eat something good,
-                and just spend some time together. 🥂
-            </p>
 
-            <div class="date-box">
+    /*
+     * Cute messages
+     */
 
-                <div class="date">
-                    🍷 Daru Date 🍷
-                </div>
+    const messages = [
 
-                <div class="details">
-                    📅 <span class="highlight">11 September 2026</span>
-                    <br>
-                    🥂 You + Me + Drinks + Food
-                    <br>
-                    ❤️ No unnecessary drama
-                </div>
+        "Are you sure you want to avoid me? 🥺",
 
-            </div>
+        "Sukoon nahi chahiye? 😭",
 
-            <h2>So... what do you say? 🥺</h2>
+        "11 September ko ek drink bhi mere saath nahi? 🍷🥺",
 
-            <div class="buttons">
+        "Itna bhaav? 😤❤️",
 
-                <button id="yesBtn">
-                    YES ❤️
-                </button>
+        "Mere saath thoda sa time spend kar lo na... 🥺",
 
-                <button id="noBtn">
-                    NO 🙈
-                </button>
+        "Okay Shruti... think again? 👉👈❤️",
 
-            </div>
+        "Last chance... Daru Date? 🍷❤️"
 
-            <div id="messageContainer"></div>
+    ];
 
-        </div>
 
+    /*
+     * NO button texts
+     */
 
-        <!-- Success -->
-        <div id="success" class="hidden">
+    const buttonTexts = [
 
-            <div class="heart">🥂❤️</div>
+        "Really? 🥺",
 
-            <h1>
-                It's a Date! 🎉
-            </h1>
+        "Still no? 😭",
 
-            <div class="success-date">
-                11 September 2026
-            </div>
+        "Think again ❤️",
 
-            <div class="success-details">
+        "Maybe? 🥺",
 
-                <p>
-                    You + Me + Drinks + Food ❤️
-                </p>
+        "Come on 😭",
 
-                <p>
-                    And absolutely no unnecessary drama. 😌
-                </p>
+        "Please? 👉👈",
 
-                <p>
-                    I can't wait, Shruti. 🥂❤️
-                </p>
+        "Last chance ❤️"
 
-            </div>
+    ];
 
-        </div>
 
-    </div>
+    let noClickCount = 0;
 
 
-    <script>
+    /*
+     * NO button
+     */
 
-        const yesBtn = document.getElementById("yesBtn");
-        const noBtn = document.getElementById("noBtn");
-
-        const questionBox = document.getElementById("questionBox");
-        const success = document.getElementById("success");
-
-        const messageContainer =
-            document.getElementById("messageContainer");
-
-
-        /*
-         * Cute messages for the NO button
-         */
-
-        const messages = [
-
-            "Are you sure you want to avoid me? 🥺",
-
-            "Sukoon nahi chahiye? 😭",
-
-            "11 September ko ek drink bhi mere saath nahi? 🍷🥺",
-
-            "Itna bhaav? 😤❤️",
-
-            "Mere saath thoda sa time spend kar lo na... 🥺",
-
-            "Okay Shruti... think again? 👉👈❤️",
-
-            "Last chance... Daru Date? 🍷❤️"
-
-        ];
-
-
-        let noClickCount = 0;
-
-
-        /*
-         * NO button
-         */
-
-        noBtn.addEventListener("click", function () {
-
-            const message =
-                messages[noClickCount % messages.length];
-
-            showMessage(message);
-
-            noClickCount++;
-
-
-            /*
-             * Change the NO button text
-             */
-
-            const buttonTexts = [
-
-                "Really? 🥺",
-
-                "Still no? 😭",
-
-                "Think again ❤️",
-
-                "Maybe? 🥺",
-
-                "Come on 😭",
-
-                "Please? 👉👈",
-
-                "Last chance ❤️"
-
-            ];
-
-            noBtn.textContent =
-                buttonTexts[
-                    Math.min(noClickCount, buttonTexts.length - 1)
-                ];
-
-
-            /*
-             * Slightly increase YES button size
-             */
-
-            const currentScale =
-                1 + Math.min(noClickCount * 0.04, 0.25);
-
-            yesBtn.style.transform =
-                `scale(${currentScale})`;
-
-        });
-
+    noBtn.addEventListener("click", function () {
 
         /*
          * Show cute message
          */
 
-        function showMessage(message) {
+        const message =
+            messages[noClickCount % messages.length];
 
-            messageContainer.innerHTML = "";
-
-            const messageElement =
-                document.createElement("div");
-
-            messageElement.className =
-                "cute-message";
-
-            messageElement.textContent =
-                message;
-
-            messageContainer.appendChild(
-                messageElement
-            );
-        }
+        showMessage(message);
 
 
         /*
-         * YES button
+         * Change NO button text
          */
 
-        yesBtn.addEventListener("click", function () {
-
-            questionBox.classList.add("hidden");
-
-            success.classList.remove("hidden");
-
-            createConfetti();
-
-        });
-
-
-        /*
-         * Confetti
-         */
-
-        function createConfetti() {
-
-            const emojis = [
-                "❤️",
-                "💕",
-                "💖",
-                "🥂",
-                "🍷",
-                "🎉",
-                "✨",
-                "💗",
-                "🥳"
+        noBtn.textContent =
+            buttonTexts[
+                Math.min(
+                    noClickCount,
+                    buttonTexts.length - 1
+                )
             ];
 
 
-            for (let i = 0; i < 100; i++) {
+        /*
+         * Make YES button slightly bigger
+         */
 
-                const confetti =
-                    document.createElement("div");
+        const currentScale =
+            1 + Math.min(noClickCount * 0.04, 0.25);
 
-                confetti.className =
-                    "confetti";
-
-                confetti.textContent =
-                    emojis[
-                        Math.floor(
-                            Math.random() * emojis.length
-                        )
-                    ];
-
-                confetti.style.left =
-                    Math.random() * 100 + "vw";
-
-                confetti.style.animationDuration =
-                    (2 + Math.random() * 3) + "s";
-
-                confetti.style.animationDelay =
-                    Math.random() * 1.5 + "s";
-
-                document.body.appendChild(confetti);
+        yesBtn.style.transform =
+            `scale(${currentScale})`;
 
 
-                /*
-                 * Remove after animation
-                 */
+        /*
+         * MOVE THE NO BUTTON
+         */
 
-                setTimeout(() => {
+        moveNoButton();
 
-                    confetti.remove();
 
-                }, 5000);
+        noClickCount++;
 
-            }
+    });
+
+
+    /*
+     * Move NO button to a random position
+     */
+
+    function moveNoButton() {
+
+        /*
+         * Change button from normal layout
+         * to fixed positioning
+         */
+
+        noBtn.style.position = "fixed";
+
+        /*
+         * Get button dimensions
+         */
+
+        const buttonWidth = noBtn.offsetWidth;
+        const buttonHeight = noBtn.offsetHeight;
+
+
+        /*
+         * Keep the button inside the screen
+         */
+
+        const maxX =
+            window.innerWidth - buttonWidth - 20;
+
+        const maxY =
+            window.innerHeight - buttonHeight - 20;
+
+
+        /*
+         * Random position
+         */
+
+        const randomX =
+            Math.max(
+                20,
+                Math.random() * maxX
+            );
+
+        const randomY =
+            Math.max(
+                20,
+                Math.random() * maxY
+            );
+
+
+        /*
+         * Smooth movement
+         */
+
+        noBtn.style.transition =
+            "left 0.35s ease, top 0.35s ease, transform 0.25s ease";
+
+        noBtn.style.left =
+            randomX + "px";
+
+        noBtn.style.top =
+            randomY + "px";
+
+
+        /*
+         * Little bounce effect
+         */
+
+        noBtn.style.transform =
+            "scale(1.08)";
+
+        setTimeout(() => {
+
+            noBtn.style.transform =
+                "scale(1)";
+
+        }, 250);
+
+    }
+
+
+    /*
+     * Show cute message
+     */
+
+    function showMessage(message) {
+
+        messageContainer.innerHTML = "";
+
+        const messageElement =
+            document.createElement("div");
+
+        messageElement.className =
+            "cute-message";
+
+        messageElement.textContent =
+            message;
+
+        messageContainer.appendChild(
+            messageElement
+        );
+
+    }
+
+
+    /*
+     * YES button
+     */
+
+    yesBtn.addEventListener("click", function () {
+
+        questionBox.classList.add("hidden");
+
+        success.classList.remove("hidden");
+
+        createConfetti();
+
+    });
+
+
+    /*
+     * Confetti
+     */
+
+    function createConfetti() {
+
+        const emojis = [
+
+            "❤️",
+            "💕",
+            "💖",
+            "🥂",
+            "🍷",
+            "🎉",
+            "✨",
+            "💗",
+            "🥳"
+
+        ];
+
+
+        for (let i = 0; i < 100; i++) {
+
+            const confetti =
+                document.createElement("div");
+
+            confetti.className =
+                "confetti";
+
+            confetti.textContent =
+                emojis[
+                    Math.floor(
+                        Math.random() * emojis.length
+                    )
+                ];
+
+
+            confetti.style.left =
+                Math.random() * 100 + "vw";
+
+
+            confetti.style.animationDuration =
+                (2 + Math.random() * 3) + "s";
+
+
+            confetti.style.animationDelay =
+                Math.random() * 1.5 + "s";
+
+
+            document.body.appendChild(
+                confetti
+            );
+
+
+            setTimeout(() => {
+
+                confetti.remove();
+
+            }, 5000);
 
         }
 
-    </script>
+    }
 
-</body>
-</html>
+</script>
