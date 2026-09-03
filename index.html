@@ -9,213 +9,179 @@
     <style>
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
         body {
+            margin: 0;
             min-height: 100vh;
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(135deg, #ffd6e7, #ffe9d6, #fff0f5);
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ffd6e8, #ffe9d6);
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            position: relative;
         }
 
-        /* Main Card */
         .card {
             width: 90%;
-            max-width: 550px;
-            background: rgba(255, 255, 255, 0.94);
-            border-radius: 30px;
-            padding: 45px 30px;
+            max-width: 520px;
+            background: white;
+            padding: 40px 25px;
+            border-radius: 25px;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
             position: relative;
             z-index: 10;
         }
 
         .heart {
             font-size: 55px;
-            animation: heartbeat 1.5s infinite;
             margin-bottom: 10px;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.15);
-            }
         }
 
         h1 {
             color: #e75480;
-            font-size: 38px;
-            margin-bottom: 18px;
+            font-size: 36px;
+            margin: 10px 0 20px;
         }
 
         .message {
             color: #555;
             font-size: 17px;
             line-height: 1.7;
-            margin-bottom: 20px;
         }
 
         .date {
             display: inline-block;
-            background: #fff0f5;
-            color: #d6336c;
+            margin: 20px 0;
             padding: 12px 20px;
-            border-radius: 50px;
+            background: #fff0f5;
+            border-radius: 30px;
+            color: #d6336c;
             font-weight: bold;
-            font-size: 18px;
-            margin: 10px 0 25px;
         }
 
         .question {
             font-size: 24px;
             font-weight: bold;
+            margin: 10px 0 30px;
             color: #333;
-            margin-bottom: 30px;
         }
 
-        /* Buttons */
         .buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
             align-items: center;
-            position: relative;
+            gap: 20px;
             min-height: 60px;
         }
 
         button {
             border: none;
-            padding: 14px 28px;
             border-radius: 50px;
+            padding: 14px 28px;
             font-size: 17px;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         #yesBtn {
             background: #e75480;
             color: white;
-            box-shadow: 0 8px 20px rgba(231, 84, 128, 0.35);
-        }
-
-        #yesBtn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 10px 25px rgba(231, 84, 128, 0.45);
+            box-shadow: 0 7px 18px rgba(231,84,128,0.35);
+            transition: transform 0.3s;
         }
 
         #noBtn {
             background: #eeeeee;
             color: #555;
             position: relative;
-            z-index: 100;
+            z-index: 1000;
+            transition: left 0.35s ease, top 0.35s ease,
+                        transform 0.2s ease;
         }
 
-        #noBtn:hover {
-            transform: scale(1.05);
-        }
-
-        /* Cute response message */
         #responseMessage {
+            min-height: 35px;
             margin-top: 25px;
-            min-height: 30px;
-            font-size: 17px;
-            font-weight: 600;
             color: #d6336c;
+            font-size: 17px;
+            font-weight: bold;
         }
 
-        /* Success screen */
         #successScreen {
             display: none;
         }
 
         #successScreen h1 {
-            font-size: 40px;
+            font-size: 38px;
+        }
+
+        .success-date {
+            color: #e75480;
+            font-size: 25px;
+            font-weight: bold;
+            margin: 20px 0;
         }
 
         .success-text {
             color: #555;
             font-size: 18px;
             line-height: 1.8;
-            margin-top: 15px;
-        }
-
-        .date-big {
-            font-size: 28px;
-            color: #e75480;
-            font-weight: bold;
-            margin: 20px 0;
         }
 
         /* Floating hearts */
+
         .floating-heart {
-            position: absolute;
-            bottom: -50px;
+            position: fixed;
+            bottom: -40px;
             font-size: 25px;
-            opacity: 0.7;
-            animation: floatUp linear infinite;
+            animation: floatUp 8s linear infinite;
+            opacity: 0.6;
             pointer-events: none;
         }
 
         @keyframes floatUp {
             0% {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(0);
                 opacity: 0;
             }
 
-            10% {
-                opacity: 0.7;
+            20% {
+                opacity: 0.6;
             }
 
             100% {
-                transform: translateY(-110vh) rotate(360deg);
+                transform: translateY(-110vh);
                 opacity: 0;
             }
         }
 
         /* Confetti */
+
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
-            top: -20px;
-            z-index: 999;
+            top: -30px;
+            font-size: 20px;
+            z-index: 9999;
             pointer-events: none;
-            animation: confettiFall 3s linear forwards;
+            animation: fall 3s linear forwards;
         }
 
-        @keyframes confettiFall {
-            0% {
+        @keyframes fall {
+            from {
                 transform: translateY(0) rotate(0deg);
             }
 
-            100% {
+            to {
                 transform: translateY(110vh) rotate(720deg);
             }
         }
 
-        /* Mobile */
         @media (max-width: 600px) {
 
             .card {
-                width: 92%;
-                padding: 35px 22px;
-                border-radius: 25px;
-            }
-
-            .heart {
-                font-size: 45px;
+                padding: 30px 20px;
             }
 
             h1 {
@@ -234,10 +200,6 @@
                 padding: 12px 22px;
                 font-size: 15px;
             }
-
-            .date {
-                font-size: 16px;
-            }
         }
     </style>
 </head>
@@ -245,22 +207,29 @@
 <body>
 
     <!-- Floating Hearts -->
-    <div class="floating-heart" style="left: 5%; animation-duration: 8s;">❤️</div>
-    <div class="floating-heart" style="left: 15%; animation-duration: 10s; animation-delay: 2s;">💕</div>
-    <div class="floating-heart" style="left: 30%; animation-duration: 7s; animation-delay: 1s;">💗</div>
-    <div class="floating-heart" style="left: 50%; animation-duration: 11s; animation-delay: 3s;">❤️</div>
-    <div class="floating-heart" style="left: 70%; animation-duration: 9s; animation-delay: 1s;">💕</div>
-    <div class="floating-heart" style="left: 85%; animation-duration: 8s; animation-delay: 4s;">💗</div>
+
+    <div class="floating-heart" style="left:5%; animation-delay:0s;">❤️</div>
+    <div class="floating-heart" style="left:20%; animation-delay:2s;">💕</div>
+    <div class="floating-heart" style="left:40%; animation-delay:4s;">💗</div>
+    <div class="floating-heart" style="left:65%; animation-delay:1s;">❤️</div>
+    <div class="floating-heart" style="left:85%; animation-delay:3s;">💕</div>
+
 
     <!-- Main Card -->
+
     <div class="card">
 
-        <!-- Invitation Screen -->
+        <!-- Invitation -->
+
         <div id="invitationScreen">
 
-            <div class="heart">❤️</div>
+            <div class="heart">
+                ❤️
+            </div>
 
-            <h1>Hey Shruti ❤️</h1>
+            <h1>
+                Hey Shruti ❤️
+            </h1>
 
             <p class="message">
                 I know the last few days have probably been a lot.
@@ -273,9 +242,9 @@
                 📅 11 September 2026
             </div>
 
-            <p class="question">
+            <div class="question">
                 So... Daru Date? 🍷❤️
-            </p>
+            </div>
 
             <div class="buttons">
 
@@ -294,27 +263,38 @@
         </div>
 
 
-        <!-- Success Screen -->
+        <!-- Success -->
+
         <div id="successScreen">
 
-            <div class="heart">🥂</div>
+            <div class="heart">
+                🥂
+            </div>
 
-            <h1>It's a Date! 🎉</h1>
+            <h1>
+                It's a Date! 🎉
+            </h1>
 
-            <div class="date-big">
+            <div class="success-date">
                 11 September 2026 ❤️
             </div>
 
             <p class="success-text">
+
                 You + Me + Drinks + Food 🍷🍕
+
                 <br><br>
+
                 Good conversations.
                 <br>
                 Lots of laughs.
                 <br>
                 And absolutely no unnecessary drama. 😌
+
                 <br><br>
+
                 I can't wait, Shruti. ❤️🥂
+
             </p>
 
         </div>
@@ -324,8 +304,15 @@
 
     <script>
 
+        /* ==========================
+           GET ELEMENTS
+        ========================== */
+
         const yesBtn = document.getElementById("yesBtn");
         const noBtn = document.getElementById("noBtn");
+
+        const responseMessage =
+            document.getElementById("responseMessage");
 
         const invitationScreen =
             document.getElementById("invitationScreen");
@@ -333,13 +320,10 @@
         const successScreen =
             document.getElementById("successScreen");
 
-        const responseMessage =
-            document.getElementById("responseMessage");
 
-
-        /* =========================
-           NO BUTTON MESSAGES
-        ========================= */
+        /* ==========================
+           NO BUTTON DATA
+        ========================== */
 
         const messages = [
 
@@ -347,7 +331,7 @@
 
             "Sukoon nahi chahiye? 😭",
 
-            "11 September ko ek drink bhi mere saath nahi? 🍷🥺",
+            "Ek drink bhi mere saath nahi? 🍷🥺",
 
             "Itna bhaav? 😤❤️",
 
@@ -357,11 +341,11 @@
 
             "Last chance... Daru Date? 🍷❤️",
 
-            "Achhaaa... NO button hi dabaogi? 😭",
+            "Seriously? You're still saying NO? 😭",
 
-            "Main itni easily haar maannewala nahi hoon 😌❤️",
+            "Main haar nahi maanunga 😌❤️",
 
-            "Ek YES kar do na... pleaseee 🥺❤️"
+            "Bas ek YES kar do ❤️"
 
         ];
 
@@ -391,14 +375,14 @@
         ];
 
 
-        let noClickCount = 0;
+        let noClicks = 0;
 
 
-        /* =========================
+        /* ==========================
            YES BUTTON
-        ========================= */
+        ========================== */
 
-        yesBtn.addEventListener("click", function () {
+        yesBtn.addEventListener("click", function() {
 
             invitationScreen.style.display = "none";
 
@@ -409,148 +393,126 @@
         });
 
 
-        /* =========================
+        /* ==========================
            NO BUTTON
-        ========================= */
+        ========================== */
 
-        noBtn.addEventListener("click", function () {
+        noBtn.addEventListener("click", function() {
 
-            /* Show cute message */
+            /* Show message */
 
-            const message =
-                messages[noClickCount % messages.length];
-
-            responseMessage.textContent = message;
+            responseMessage.innerText =
+                messages[noClicks % messages.length];
 
 
-            /* Change NO button text */
+            /* Change button text */
 
-            noBtn.textContent =
+            noBtn.innerText =
                 buttonTexts[
                     Math.min(
-                        noClickCount,
+                        noClicks,
                         buttonTexts.length - 1
                     )
                 ];
 
 
-            /* Move NO button */
+            /* Move button */
 
             moveNoButton();
 
 
-            /* Make YES button bigger */
+            /* Make YES bigger */
 
-            const currentScale =
-                1 + Math.min(noClickCount * 0.04, 0.25);
+            let scale =
+                1 + Math.min(noClicks * 0.05, 0.30);
 
             yesBtn.style.transform =
-                `scale(${currentScale})`;
+                "scale(" + scale + ")";
 
 
-            noClickCount++;
+            noClicks++;
 
         });
 
 
-        /* =========================
+        /* ==========================
            MOVE NO BUTTON
-        ========================= */
+        ========================== */
 
         function moveNoButton() {
 
             /*
-                Make the NO button independent
-                from the normal layout.
-            */
+             * IMPORTANT:
+             * Fixed positioning means the button
+             * moves relative to the browser screen.
+             */
 
             noBtn.style.position = "fixed";
 
 
-            /* Get button dimensions */
+            /* Get current button size */
 
-            const buttonWidth =
-                noBtn.offsetWidth;
-
-            const buttonHeight =
-                noBtn.offsetHeight;
+            const width = noBtn.offsetWidth;
+            const height = noBtn.offsetHeight;
 
 
-            /* Safe distance from screen edges */
+            /* Keep button away from edges */
 
-            const padding = 25;
+            const padding = 20;
 
 
-            /*
-                Calculate available screen area
-            */
+            /* Calculate safe screen area */
 
             const maxX =
-                window.innerWidth -
-                buttonWidth -
-                padding;
+                window.innerWidth - width - padding;
 
             const maxY =
-                window.innerHeight -
-                buttonHeight -
-                padding;
+                window.innerHeight - height - padding;
 
 
-            /*
-                Generate random position
-            */
+            /* Generate random coordinates */
 
-            const randomX =
-                padding +
-                Math.random() *
-                (maxX - padding);
-
-            const randomY =
-                padding +
-                Math.random() *
-                (maxY - padding);
+            const x =
+                Math.floor(
+                    Math.random() *
+                    Math.max(maxX - padding, 1)
+                ) + padding;
 
 
-            /*
-                Smooth movement
-            */
-
-            noBtn.style.transition =
-                "left 0.4s ease, top 0.4s ease, transform 0.2s ease";
-
-
-            noBtn.style.left =
-                randomX + "px";
-
-            noBtn.style.top =
-                randomY + "px";
+            const y =
+                Math.floor(
+                    Math.random() *
+                    Math.max(maxY - padding, 1)
+                ) + padding;
 
 
-            /*
-                Little bounce
-            */
+            /* Move button */
 
-            noBtn.style.transform =
-                "scale(1.15)";
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
 
 
-            setTimeout(function () {
+            /* Small bounce */
 
-                noBtn.style.transform =
-                    "scale(1)";
+            noBtn.style.transform = "scale(1.15)";
+
+
+            setTimeout(function() {
+
+                noBtn.style.transform = "scale(1)";
 
             }, 200);
 
         }
 
 
-        /* =========================
+        /* ==========================
            CONFETTI
-        ========================= */
+        ========================== */
 
         function createConfetti() {
 
-            const symbols = [
+            const emojis = [
                 "❤️",
                 "💕",
                 "💗",
@@ -563,110 +525,46 @@
 
             for (let i = 0; i < 80; i++) {
 
-                const confetti =
+                const piece =
                     document.createElement("div");
 
-                confetti.classList.add("confetti");
 
-                confetti.textContent =
-                    symbols[
+                piece.className = "confetti";
+
+
+                piece.innerText =
+                    emojis[
                         Math.floor(
                             Math.random() *
-                            symbols.length
+                            emojis.length
                         )
                     ];
 
 
-                confetti.style.left =
+                piece.style.left =
                     Math.random() * 100 + "vw";
 
 
-                confetti.style.animationDuration =
+                piece.style.animationDuration =
                     (2 + Math.random() * 3) + "s";
 
 
-                confetti.style.animationDelay =
-                    Math.random() * 1.5 + "s";
+                piece.style.animationDelay =
+                    Math.random() + "s";
 
 
-                confetti.style.fontSize =
-                    (12 + Math.random() * 18) + "px";
+                document.body.appendChild(piece);
 
 
-                document.body.appendChild(confetti);
+                setTimeout(function() {
 
+                    piece.remove();
 
-                /*
-                    Remove confetti after animation
-                */
-
-                setTimeout(function () {
-
-                    confetti.remove();
-
-                }, 5000);
+                }, 6000);
 
             }
 
         }
-
-
-        /* =========================
-           PREVENT NO BUTTON FROM
-           GOING OUTSIDE AFTER RESIZE
-        ========================= */
-
-        window.addEventListener("resize", function () {
-
-            if (noBtn.style.position === "fixed") {
-
-                const buttonWidth =
-                    noBtn.offsetWidth;
-
-                const buttonHeight =
-                    noBtn.offsetHeight;
-
-                const maxX =
-                    window.innerWidth -
-                    buttonWidth -
-                    20;
-
-                const maxY =
-                    window.innerHeight -
-                    buttonHeight -
-                    20;
-
-
-                let currentX =
-                    parseFloat(noBtn.style.left) || 20;
-
-                let currentY =
-                    parseFloat(noBtn.style.top) || 20;
-
-
-                currentX =
-                    Math.min(
-                        Math.max(currentX, 10),
-                        maxX
-                    );
-
-
-                currentY =
-                    Math.min(
-                        Math.max(currentY, 10),
-                        maxY
-                    );
-
-
-                noBtn.style.left =
-                    currentX + "px";
-
-                noBtn.style.top =
-                    currentY + "px";
-
-            }
-
-        });
 
     </script>
 
