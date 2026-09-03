@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Daru Date? ❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            overflow: hidden;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            padding: 40px 25px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 30px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+        }
+
+        .emoji {
+            font-size: 70px;
+            margin-bottom: 15px;
+            animation: bounce 1.5s infinite;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .question {
+            font-size: 25px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            min-height: 60px;
+        }
+
+        button {
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #yesBtn {
+            background: white;
+            color: #ff4f81;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+        }
+
+        #noBtn {
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            position: relative;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #success {
+            animation: appear 0.8s ease;
+        }
+
+        #success h2 {
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
+
+        #success p {
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 25px;
+            animation: floatUp 8s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-110vh);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .question {
+                font-size: 21px;
+            }
+
+            .description {
+                font-size: 15px;
+            }
+
+            .emoji {
+                font-size: 55px;
+            }
+
+            .buttons {
+                gap: 10px;
+            }
+
+            button {
+                padding: 13px 22px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating hearts -->
+    <div class="heart" style="left: 10%; animation-delay: 0s;">❤️</div>
+    <div class="heart" style="left: 25%; animation-delay: 2s;">💕</div>
+    <div class="heart" style="left: 45%; animation-delay: 4s;">❤️</div>
+    <div class="heart" style="left: 65%; animation-delay: 1s;">💗</div>
+    <div class="heart" style="left: 85%; animation-delay: 3s;">💕</div>
+
+    <div class="container">
+
+        <div id="questionBox">
+
+            <div class="emoji">
+                🍷❤️
+            </div>
+
+            <h1>Hey Beautiful...</h1>
+
+            <div class="question">
+                I have a very important question for you.
+            </div>
+
+            <div class="description">
+                Would you like to go on a little<br>
+                <strong>Daru Date</strong> with me? 🍷🥂<br><br>
+
+                Good drinks, good food,<br>
+                terrible jokes and just you & me. ❤️
+            </div>
+
+            <div class="buttons">
+
+                <button id="yesBtn">
+                    YES ❤️
+                </button>
+
+                <button id="noBtn">
+                    NO 😐
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div id="success" class="hidden">
+
+            <div class="emoji">
+                🥂❤️
+            </div>
+
+            <h2>IT'S A DATE! 🎉</h2>
+
+            <p>
+                I knew you'd say yes. 😌
+                <br><br>
+                Now get ready for our
+                <strong>Daru Date</strong> 🍷
+                <br><br>
+                ❤️ Can't wait to see you ❤️
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+
+        const questionBox = document.getElementById("questionBox");
+        const success = document.getElementById("success");
+
+
+        // YES button
+        yesBtn.addEventListener("click", function () {
+
+            questionBox.classList.add("hidden");
+            success.classList.remove("hidden");
+
+            createConfetti();
+
+        });
+
+
+        // NO button runs away
+        noBtn.addEventListener("mouseover", moveNoButton);
+
+        noBtn.addEventListener("click", moveNoButton);
+
+
+        function moveNoButton() {
+
+            const container = document.querySelector(".container");
+
+            const maxX = container.clientWidth - noBtn.offsetWidth - 20;
+            const maxY = 150;
+
+            const randomX = Math.random() * maxX - maxX / 2;
+            const randomY = Math.random() * maxY - maxY / 2;
+
+            noBtn.style.transform =
+                `translate(${randomX}px, ${randomY}px)`;
+        }
+
+
+        // Confetti
+        function createConfetti() {
+
+            const emojis = ["❤️", "💕", "🎉", "🥂", "🍷", "✨"];
+
+            for (let i = 0; i < 80; i++) {
+
+                const confetti = document.createElement("div");
+
+                confetti.innerHTML =
+                    emojis[Math.floor(Math.random() * emojis.length)];
+
+                confetti.style.position = "fixed";
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.top = "-20px";
+                confetti.style.fontSize =
+                    (15 + Math.random() * 25) + "px";
+
+                confetti.style.zIndex = "9999";
+
+                confetti.style.transition =
+                    "transform 3s linear, opacity 3s linear";
+
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+
+                    confetti.style.transform =
+                        `translateY(110vh) rotate(${Math.random() * 720}deg)`;
+
+                    confetti.style.opacity = "0";
+
+                }, 50);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3500);
+            }
+        }
+
+    </script>
+
+</body>
+</html>
