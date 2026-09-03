@@ -1,297 +1,63 @@
-<script>
+noBtn.addEventListener("click", function () {
 
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
+    // Show the next cute message
+    const message = messages[noClickCount % messages.length];
+    showMessage(message);
 
-    const questionBox = document.getElementById("questionBox");
-    const success = document.getElementById("success");
+    // Change button text
+    noBtn.textContent =
+        buttonTexts[Math.min(noClickCount, buttonTexts.length - 1)];
 
-    const messageContainer =
-        document.getElementById("messageContainer");
+    // Move the button somewhere else
+    moveNoButton();
 
+    // Make YES button slightly bigger
+    const currentScale =
+        1 + Math.min(noClickCount * 0.04, 0.25);
 
-    /*
-     * Cute messages
-     */
+    yesBtn.style.transform = `scale(${currentScale})`;
 
-    const messages = [
+    noClickCount++;
+});
 
-        "Are you sure you want to avoid me? 🥺",
 
-        "Sukoon nahi chahiye? 😭",
+function moveNoButton() {
 
-        "11 September ko ek drink bhi mere saath nahi? 🍷🥺",
+    // Make the button independent of the normal layout
+    noBtn.style.position = "fixed";
 
-        "Itna bhaav? 😤❤️",
+    // Button dimensions
+    const buttonWidth = noBtn.offsetWidth;
+    const buttonHeight = noBtn.offsetHeight;
 
-        "Mere saath thoda sa time spend kar lo na... 🥺",
+    // Safe area around the screen edges
+    const padding = 25;
 
-        "Okay Shruti... think again? 👉👈❤️",
+    // Available screen space
+    const maxX =
+        window.innerWidth - buttonWidth - padding;
 
-        "Last chance... Daru Date? 🍷❤️"
+    const maxY =
+        window.innerHeight - buttonHeight - padding;
 
-    ];
+    // Generate completely random coordinates
+    const randomX =
+        padding + Math.random() * (maxX - padding);
 
+    const randomY =
+        padding + Math.random() * (maxY - padding);
 
-    /*
-     * NO button texts
-     */
+    // Smooth movement
+    noBtn.style.transition =
+        "left 0.4s ease, top 0.4s ease, transform 0.2s ease";
 
-    const buttonTexts = [
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
 
-        "Really? 🥺",
+    // Little bounce
+    noBtn.style.transform = "scale(1.15)";
 
-        "Still no? 😭",
-
-        "Think again ❤️",
-
-        "Maybe? 🥺",
-
-        "Come on 😭",
-
-        "Please? 👉👈",
-
-        "Last chance ❤️"
-
-    ];
-
-
-    let noClickCount = 0;
-
-
-    /*
-     * NO button
-     */
-
-    noBtn.addEventListener("click", function () {
-
-        /*
-         * Show cute message
-         */
-
-        const message =
-            messages[noClickCount % messages.length];
-
-        showMessage(message);
-
-
-        /*
-         * Change NO button text
-         */
-
-        noBtn.textContent =
-            buttonTexts[
-                Math.min(
-                    noClickCount,
-                    buttonTexts.length - 1
-                )
-            ];
-
-
-        /*
-         * Make YES button slightly bigger
-         */
-
-        const currentScale =
-            1 + Math.min(noClickCount * 0.04, 0.25);
-
-        yesBtn.style.transform =
-            `scale(${currentScale})`;
-
-
-        /*
-         * MOVE THE NO BUTTON
-         */
-
-        moveNoButton();
-
-
-        noClickCount++;
-
-    });
-
-
-    /*
-     * Move NO button to a random position
-     */
-
-    function moveNoButton() {
-
-        /*
-         * Change button from normal layout
-         * to fixed positioning
-         */
-
-        noBtn.style.position = "fixed";
-
-        /*
-         * Get button dimensions
-         */
-
-        const buttonWidth = noBtn.offsetWidth;
-        const buttonHeight = noBtn.offsetHeight;
-
-
-        /*
-         * Keep the button inside the screen
-         */
-
-        const maxX =
-            window.innerWidth - buttonWidth - 20;
-
-        const maxY =
-            window.innerHeight - buttonHeight - 20;
-
-
-        /*
-         * Random position
-         */
-
-        const randomX =
-            Math.max(
-                20,
-                Math.random() * maxX
-            );
-
-        const randomY =
-            Math.max(
-                20,
-                Math.random() * maxY
-            );
-
-
-        /*
-         * Smooth movement
-         */
-
-        noBtn.style.transition =
-            "left 0.35s ease, top 0.35s ease, transform 0.25s ease";
-
-        noBtn.style.left =
-            randomX + "px";
-
-        noBtn.style.top =
-            randomY + "px";
-
-
-        /*
-         * Little bounce effect
-         */
-
-        noBtn.style.transform =
-            "scale(1.08)";
-
-        setTimeout(() => {
-
-            noBtn.style.transform =
-                "scale(1)";
-
-        }, 250);
-
-    }
-
-
-    /*
-     * Show cute message
-     */
-
-    function showMessage(message) {
-
-        messageContainer.innerHTML = "";
-
-        const messageElement =
-            document.createElement("div");
-
-        messageElement.className =
-            "cute-message";
-
-        messageElement.textContent =
-            message;
-
-        messageContainer.appendChild(
-            messageElement
-        );
-
-    }
-
-
-    /*
-     * YES button
-     */
-
-    yesBtn.addEventListener("click", function () {
-
-        questionBox.classList.add("hidden");
-
-        success.classList.remove("hidden");
-
-        createConfetti();
-
-    });
-
-
-    /*
-     * Confetti
-     */
-
-    function createConfetti() {
-
-        const emojis = [
-
-            "❤️",
-            "💕",
-            "💖",
-            "🥂",
-            "🍷",
-            "🎉",
-            "✨",
-            "💗",
-            "🥳"
-
-        ];
-
-
-        for (let i = 0; i < 100; i++) {
-
-            const confetti =
-                document.createElement("div");
-
-            confetti.className =
-                "confetti";
-
-            confetti.textContent =
-                emojis[
-                    Math.floor(
-                        Math.random() * emojis.length
-                    )
-                ];
-
-
-            confetti.style.left =
-                Math.random() * 100 + "vw";
-
-
-            confetti.style.animationDuration =
-                (2 + Math.random() * 3) + "s";
-
-
-            confetti.style.animationDelay =
-                Math.random() * 1.5 + "s";
-
-
-            document.body.appendChild(
-                confetti
-            );
-
-
-            setTimeout(() => {
-
-                confetti.remove();
-
-            }, 5000);
-
-        }
-
-    }
-
-</script>
+    setTimeout(() => {
+        noBtn.style.transform = "scale(1)";
+    }, 200);
+}
