@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="default"
+    >
 
     <title>SUKOON❤️</title>
+
 
     <style>
 
@@ -13,15 +29,43 @@
             box-sizing: border-box;
         }
 
+
+        html {
+            width: 100%;
+            min-height: 100%;
+        }
+
+
         body {
+
             margin: 0;
+
+            width: 100%;
             min-height: 100vh;
+            min-height: 100dvh;
+
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #ffd6e8, #ffe9d6);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffd6e8,
+                    #ffe9d6
+                );
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
             overflow: hidden;
+
+            padding:
+                env(safe-area-inset-top)
+                env(safe-area-inset-right)
+                env(safe-area-inset-bottom)
+                env(safe-area-inset-left);
         }
 
 
@@ -30,24 +74,38 @@
         ========================== */
 
         .card {
-            width: 90%;
-            max-width: 820px;
-            max-height: 95vh;
+
+            width: min(90%, 820px);
+
+            max-height: 92dvh;
 
             background: white;
 
-            padding: 25px 25px;
+            padding: 28px 25px;
 
             border-radius: 25px;
 
             text-align: center;
 
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.15);
 
             position: relative;
+
             z-index: 10;
 
             overflow-y: auto;
+
+            overflow-x: hidden;
+
+            -webkit-overflow-scrolling: touch;
+
+            scrollbar-width: none;
+        }
+
+
+        .card::-webkit-scrollbar {
+            display: none;
         }
 
 
@@ -56,8 +114,10 @@
         ========================== */
 
         .heart {
+
             font-size: 55px;
-            margin-bottom: 10px;
+
+            margin-bottom: 8px;
         }
 
 
@@ -66,9 +126,12 @@
         ========================== */
 
         h1 {
+
             color: #e75480;
+
             font-size: 36px;
-            margin: 10px 0 20px;
+
+            margin: 8px 0 18px;
         }
 
 
@@ -78,6 +141,8 @@
 
         .photo-gallery {
 
+            width: 100%;
+
             display: flex;
 
             justify-content: center;
@@ -86,13 +151,16 @@
 
             gap: 18px;
 
-            margin: 5px 0 20px;
+            margin:
+                5px auto
+                20px;
         }
 
 
         .photo-frame {
 
             width: 180px;
+
             height: 230px;
 
             padding: 7px;
@@ -101,11 +169,14 @@
 
             border-radius: 14px;
 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow:
+                0 8px 20px rgba(0,0,0,0.15);
 
             transform: rotate(-3deg);
 
-            transition: transform 0.3s ease;
+            flex-shrink: 1;
+
+            overflow: hidden;
         }
 
 
@@ -115,17 +186,10 @@
         }
 
 
-        .photo-frame:hover {
-
-            transform: rotate(0deg) scale(1.03);
-
-            z-index: 5;
-        }
-
-
         .photo-frame img {
 
             width: 100%;
+
             height: 100%;
 
             object-fit: cover;
@@ -148,7 +212,9 @@
 
             line-height: 1.55;
 
-            margin: 5px 0;
+            margin: 5px auto;
+
+            max-width: 700px;
         }
 
 
@@ -162,7 +228,7 @@
 
             margin: 15px 0;
 
-            padding: 12px 20px;
+            padding: 11px 20px;
 
             background: #fff0f5;
 
@@ -171,6 +237,8 @@
             color: #d6336c;
 
             font-weight: bold;
+
+            font-size: 15px;
         }
 
 
@@ -202,9 +270,11 @@
 
             align-items: center;
 
-            gap: 20px;
+            gap: 18px;
 
             min-height: 60px;
+
+            width: 100%;
         }
 
 
@@ -221,6 +291,12 @@
             font-weight: bold;
 
             cursor: pointer;
+
+            -webkit-tap-highlight-color: transparent;
+
+            touch-action: manipulation;
+
+            white-space: nowrap;
         }
 
 
@@ -235,9 +311,11 @@
             color: white;
 
             box-shadow:
-                0 7px 18px rgba(231,84,128,0.35);
+                0 7px 18px
+                rgba(231,84,128,0.35);
 
-            transition: transform 0.3s;
+            transition:
+                transform 0.3s;
         }
 
 
@@ -270,13 +348,15 @@
 
             min-height: 35px;
 
-            margin-top: 12px;
+            margin-top: 10px;
 
             color: #d6336c;
 
-            font-size: 17px;
+            font-size: 16px;
 
             font-weight: bold;
+
+            padding-bottom: 5px;
         }
 
 
@@ -287,12 +367,16 @@
         #successScreen {
 
             display: none;
+
+            padding: 10px 0;
         }
 
 
         #successScreen h1 {
 
             font-size: 38px;
+
+            line-height: 1.25;
         }
 
 
@@ -336,6 +420,8 @@
             opacity: 0.6;
 
             pointer-events: none;
+
+            z-index: 1;
         }
 
 
@@ -343,7 +429,8 @@
 
             0% {
 
-                transform: translateY(0);
+                transform:
+                    translateY(0);
 
                 opacity: 0;
             }
@@ -357,7 +444,8 @@
 
             100% {
 
-                transform: translateY(-110vh);
+                transform:
+                    translateY(-110vh);
 
                 opacity: 0;
             }
@@ -406,64 +494,270 @@
         }
 
 
-        /* ==========================
-           MOBILE
-        ========================== */
+        /* =================================================
+           IPHONE / MOBILE
+        ================================================= */
 
         @media (max-width: 600px) {
 
 
-            .card {
+            body {
 
-                width: 92%;
+                align-items: flex-start;
 
-                max-height: 94vh;
+                padding-top:
+                    max(
+                        15px,
+                        env(safe-area-inset-top)
+                    );
 
-                padding: 22px 18px;
+                padding-bottom:
+                    max(
+                        15px,
+                        env(safe-area-inset-bottom)
+                    );
+
+                overflow: hidden;
             }
 
+
+            .card {
+
+                width: calc(100% - 24px);
+
+                max-height: calc(
+                    100dvh -
+                    30px
+                );
+
+                padding:
+                    18px 14px
+                    20px;
+
+                border-radius: 22px;
+
+                margin: 0 auto;
+
+                -webkit-overflow-scrolling: touch;
+            }
+
+
+            /* HEART */
+
+            .heart {
+
+                font-size: 42px;
+
+                margin-bottom: 4px;
+            }
+
+
+            /* HEADING */
 
             h1 {
 
-                font-size: 30px;
+                font-size: 28px;
+
+                margin:
+                    5px 0 14px;
             }
 
 
+            /* PHOTOS */
+
             .photo-gallery {
 
-                gap: 10px;
+                gap: 9px;
 
-                margin: 5px 0 15px;
+                margin:
+                    4px auto
+                    15px;
             }
 
 
             .photo-frame {
 
-                width: 135px;
+                width: calc(
+                    50vw - 27px
+                );
 
-                height: 175px;
+                max-width: 145px;
+
+                height: 185px;
+
+                padding: 5px;
+
+                border-radius: 12px;
             }
 
+
+            .photo-frame img {
+
+                border-radius: 8px;
+            }
+
+
+            /* MESSAGE */
 
             .message {
 
                 font-size: 14px;
 
-                line-height: 1.5;
+                line-height: 1.48;
+
+                margin:
+                    4px 2px;
             }
 
 
+            /* DATE */
+
+            .date {
+
+                font-size: 13px;
+
+                padding:
+                    10px 16px;
+
+                margin:
+                    12px 0;
+            }
+
+
+            /* QUESTION */
+
             .question {
 
-                font-size: 21px;
+                font-size: 20px;
+
+                margin:
+                    4px 0 12px;
+            }
+
+
+            /* BUTTONS */
+
+            .buttons {
+
+                gap: 12px;
+
+                min-height: 55px;
             }
 
 
             button {
 
-                padding: 12px 22px;
+                padding:
+                    13px 21px;
 
                 font-size: 15px;
+
+                min-height: 46px;
+            }
+
+
+            /* RESPONSE */
+
+            #responseMessage {
+
+                font-size: 15px;
+
+                line-height: 1.4;
+
+                min-height: 32px;
+
+                margin-top: 8px;
+            }
+
+
+            /* SUCCESS */
+
+            #successScreen {
+
+                padding:
+                    10px 5px;
+            }
+
+
+            #successScreen h1 {
+
+                font-size: 30px;
+
+                line-height: 1.25;
+            }
+
+
+            .success-date {
+
+                font-size: 21px;
+
+                margin:
+                    15px 0;
+            }
+
+
+            .success-text {
+
+                font-size: 16px;
+
+                line-height: 1.65;
+            }
+
+        }
+
+
+        /* =================================================
+           VERY SMALL IPHONES
+        ================================================= */
+
+        @media (max-width: 380px) {
+
+
+            .card {
+
+                width: calc(100% - 16px);
+
+                padding:
+                    15px 10px;
+            }
+
+
+            h1 {
+
+                font-size: 25px;
+            }
+
+
+            .photo-frame {
+
+                width: calc(
+                    50vw - 21px
+                );
+
+                height: 165px;
+            }
+
+
+            .message {
+
+                font-size: 13px;
+
+                line-height: 1.45;
+            }
+
+
+            .question {
+
+                font-size: 18px;
+            }
+
+
+            button {
+
+                padding:
+                    12px 17px;
+
+                font-size: 14px;
             }
 
         }
@@ -476,9 +770,7 @@
 <body>
 
 
-    <!-- ==========================
-         FLOATING HEARTS
-    ========================== -->
+    <!-- FLOATING HEARTS -->
 
     <div
         class="floating-heart"
@@ -521,16 +813,12 @@
 
 
 
-    <!-- ==========================
-         MAIN CARD
-    ========================== -->
+    <!-- MAIN CARD -->
 
     <div class="card">
 
 
-        <!-- ==========================
-             INVITATION SCREEN
-        ========================== -->
+        <!-- INVITATION -->
 
         <div id="invitationScreen">
 
@@ -545,9 +833,7 @@
             </h1>
 
 
-            <!-- ==========================
-                 SHRUTI PHOTOS
-            ========================== -->
+            <!-- TWO PHOTOS -->
 
             <div class="photo-gallery">
 
@@ -555,7 +841,7 @@
                 <div class="photo-frame">
 
                     <img
-                        src="4dd37134-8ef2-488c-8e5b-935acff8c2d8.jpeg"
+                        src="shruti1.jpg"
                         alt="Shruti ❤️"
                     >
 
@@ -565,7 +851,7 @@
                 <div class="photo-frame">
 
                     <img
-                        src="aae308e6-dacb-448b-925b-819ae50459b9.jpeg"
+                        src="shruti2.jpg"
                         alt="Shruti ❤️"
                     >
 
@@ -576,80 +862,55 @@
 
 
 
-            <!-- ==========================
-                 MESSAGE
-            ========================== -->
+            <!-- MESSAGE -->
 
             <p class="message">
 
-
                 <strong>Hey BEAUTIFUL ❤️</strong>
 
-
                 <br><br>
-
 
                 A month ago, I didn't know that meeting you would become something this special.
 
-
                 Somehow, in such a short time, you became someone I look forward to, someone I think about, and someone who makes ordinary moments feel a little more beautiful.
 
-
                 <br><br>
-
 
                 I just want you to know that I'm here, and I'm genuinely happy that our paths crossed.
 
-
                 <br><br>
-
 
                 Maybe I don't have the right words to make everything you've been through disappear.
 
-
                 <br><br>
-
 
                 And honestly, I don't want to pretend that I can.
 
-
                 <br><br>
-
 
                 But I can promise you one thing...
 
-
                 <br><br>
-
 
                 Whenever you're around me, you never have to pretend to be okay.
 
-
                 <br><br>
-
 
                 You can just be you.
 
-
                 <br><br>
-
 
                 Just you, me, some good food, lots of DARUU, lots of laughs... and a little <strong>SUKOON</strong>. ❤️
 
-
                 <br><br>
 
-
                 <strong>DARUUU DATE? 🥂❤️</strong>
-
 
             </p>
 
 
 
-            <!-- ==========================
-                 DATE
-            ========================== -->
+            <!-- DATE -->
 
             <div class="date">
 
@@ -659,9 +920,7 @@
 
 
 
-            <!-- ==========================
-                 QUESTION
-            ========================== -->
+            <!-- QUESTION -->
 
             <div class="question">
 
@@ -671,9 +930,7 @@
 
 
 
-            <!-- ==========================
-                 BUTTONS
-            ========================== -->
+            <!-- BUTTONS -->
 
             <div class="buttons">
 
@@ -702,9 +959,7 @@
 
 
 
-        <!-- ==========================
-             SUCCESS SCREEN
-        ========================== -->
+        <!-- SUCCESS SCREEN -->
 
         <div id="successScreen">
 
@@ -736,37 +991,27 @@
 
             <p class="success-text">
 
-
                 You + Me + Drinks + Food == SUKOON
 
-
                 <br><br>
-
 
                 Good conversations.
 
                 <br>
 
-
                 Lots of laughs.
 
                 <br>
 
-
                 And absolutely no unnecessary drama. 😌
-
 
                 <br><br>
 
-
                 I love You NANU. ❤️🥂
-
 
                 <br>
 
-
                 Late Mat Krna...
-
 
             </p>
 
@@ -778,10 +1023,6 @@
 
 
 
-    <!-- ==========================
-         JAVASCRIPT
-    ========================== -->
-
     <script>
 
 
@@ -792,21 +1033,23 @@
         const yesBtn =
             document.getElementById("yesBtn");
 
-
         const noBtn =
             document.getElementById("noBtn");
 
-
         const responseMessage =
-            document.getElementById("responseMessage");
-
+            document.getElementById(
+                "responseMessage"
+            );
 
         const invitationScreen =
-            document.getElementById("invitationScreen");
-
+            document.getElementById(
+                "invitationScreen"
+            );
 
         const successScreen =
-            document.getElementById("successScreen");
+            document.getElementById(
+                "successScreen"
+            );
 
 
 
@@ -884,16 +1127,22 @@
             "click",
             function() {
 
-
                 invitationScreen.style.display =
                     "none";
-
 
                 successScreen.style.display =
                     "block";
 
-
                 createConfetti();
+
+                /*
+                 * Scroll card back to top
+                 * on mobile after YES.
+                 */
+
+                document
+                    .querySelector(".card")
+                    .scrollTop = 0;
 
             }
         );
@@ -909,16 +1158,12 @@
             function() {
 
 
-                /* Show message */
-
                 responseMessage.innerText =
                     messages[
-                        noClicks % messages.length
+                        noClicks %
+                        messages.length
                     ];
 
-
-
-                /* Change button text */
 
                 noBtn.innerText =
                     buttonTexts[
@@ -929,14 +1174,8 @@
                     ];
 
 
-
-                /* Move button */
-
                 moveNoButton();
 
-
-
-                /* Make YES bigger */
 
                 let scale =
                     1 +
@@ -964,33 +1203,23 @@
         function moveNoButton() {
 
 
-            /*
-             * Fixed positioning means the button
-             * moves relative to the browser screen.
-             */
-
             noBtn.style.position =
                 "fixed";
 
 
-            /* Get current button size */
-
             const width =
                 noBtn.offsetWidth;
-
 
             const height =
                 noBtn.offsetHeight;
 
 
-
-            /* Keep button away from edges */
+            /*
+             * Extra safe area for iPhone.
+             */
 
             const padding = 20;
 
-
-
-            /* Calculate safe screen area */
 
             const maxX =
                 window.innerWidth -
@@ -1004,9 +1233,6 @@
                 padding;
 
 
-
-            /* Generate random coordinates */
-
             const x =
                 Math.floor(
                     Math.random() *
@@ -1014,7 +1240,8 @@
                         maxX - padding,
                         1
                     )
-                ) + padding;
+                ) +
+                padding;
 
 
             const y =
@@ -1024,11 +1251,9 @@
                         maxY - padding,
                         1
                     )
-                ) + padding;
+                ) +
+                padding;
 
-
-
-            /* Move button */
 
             noBtn.style.left =
                 x + "px";
@@ -1037,9 +1262,6 @@
             noBtn.style.top =
                 y + "px";
 
-
-
-            /* Small bounce */
 
             noBtn.style.transform =
                 "scale(1.15)";
@@ -1079,7 +1301,6 @@
             ];
 
 
-
             for (
                 let i = 0;
                 i < 80;
@@ -1106,7 +1327,6 @@
                     ];
 
 
-
                 piece.style.left =
                     Math.random() *
                     100 +
@@ -1131,7 +1351,6 @@
                 );
 
 
-
                 setTimeout(
                     function() {
 
@@ -1145,9 +1364,7 @@
 
         }
 
-
     </script>
-
 
 </body>
 
