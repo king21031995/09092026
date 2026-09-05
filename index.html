@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>SUKOON❤️</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -22,23 +24,46 @@
             overflow: hidden;
         }
 
-        .card {width: 90%;
+
+        /* ==========================
+           MAIN CARD
+        ========================== */
+
+        .card {
+            width: 90%;
             max-width: 820px;
-            max-height: 100vh;
+            max-height: 95vh;
+
             background: white;
+
             padding: 25px 25px;
+
             border-radius: 25px;
+
             text-align: center;
+
             box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+
             position: relative;
             z-index: 10;
+
+            overflow-y: auto;
         }
 
+
+        /* ==========================
+           HEART
+        ========================== */
 
         .heart {
             font-size: 55px;
             margin-bottom: 10px;
         }
+
+
+        /* ==========================
+           HEADING
+        ========================== */
 
         h1 {
             color: #e75480;
@@ -46,294 +71,743 @@
             margin: 10px 0 20px;
         }
 
-        .message {
-            color: #555;
-            font-size: 17px;
-            line-height: 1.7;
+
+        /* ==========================
+           PHOTO GALLERY
+        ========================== */
+
+        .photo-gallery {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 18px;
+
+            margin: 5px 0 20px;
         }
+
+
+        .photo-frame {
+
+            width: 180px;
+            height: 230px;
+
+            padding: 7px;
+
+            background: white;
+
+            border-radius: 14px;
+
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+            transform: rotate(-3deg);
+
+            transition: transform 0.3s ease;
+        }
+
+
+        .photo-frame:nth-child(2) {
+
+            transform: rotate(3deg);
+        }
+
+
+        .photo-frame:hover {
+
+            transform: rotate(0deg) scale(1.03);
+
+            z-index: 5;
+        }
+
+
+        .photo-frame img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            border-radius: 9px;
+
+            display: block;
+        }
+
+
+        /* ==========================
+           MESSAGE
+        ========================== */
+
+        .message {
+
+            color: #555;
+
+            font-size: 16px;
+
+            line-height: 1.55;
+
+            margin: 5px 0;
+        }
+
+
+        /* ==========================
+           DATE
+        ========================== */
 
         .date {
+
             display: inline-block;
-            margin: 20px 0;
+
+            margin: 15px 0;
+
             padding: 12px 20px;
+
             background: #fff0f5;
+
             border-radius: 30px;
+
             color: #d6336c;
+
             font-weight: bold;
         }
 
+
+        /* ==========================
+           QUESTION
+        ========================== */
+
         .question {
-            font-size: 24px;
+
+            font-size: 22px;
+
             font-weight: bold;
-            margin: 10px 0 30px;
+
+            margin: 5px 0 15px;
+
             color: #333;
         }
 
+
+        /* ==========================
+           BUTTONS
+        ========================== */
+
         .buttons {
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
             gap: 20px;
+
             min-height: 60px;
         }
 
+
         button {
+
             border: none;
+
             border-radius: 50px;
+
             padding: 14px 28px;
+
             font-size: 17px;
+
             font-weight: bold;
+
             cursor: pointer;
         }
 
+
+        /* ==========================
+           YES BUTTON
+        ========================== */
+
         #yesBtn {
+
             background: #e75480;
+
             color: white;
-            box-shadow: 0 7px 18px rgba(231,84,128,0.35);
+
+            box-shadow:
+                0 7px 18px rgba(231,84,128,0.35);
+
             transition: transform 0.3s;
         }
 
+
+        /* ==========================
+           NO BUTTON
+        ========================== */
+
         #noBtn {
+
             background: #eeeeee;
+
             color: #555;
+
             position: relative;
+
             z-index: 1000;
-            transition: left 0.35s ease, top 0.35s ease,
-                        transform 0.2s ease;
+
+            transition:
+                left 0.35s ease,
+                top 0.35s ease,
+                transform 0.2s ease;
         }
 
+
+        /* ==========================
+           RESPONSE MESSAGE
+        ========================== */
+
         #responseMessage {
+
             min-height: 35px;
-            margin-top: 25px;
+
+            margin-top: 12px;
+
             color: #d6336c;
+
             font-size: 17px;
+
             font-weight: bold;
         }
 
+
+        /* ==========================
+           SUCCESS SCREEN
+        ========================== */
+
         #successScreen {
+
             display: none;
         }
 
+
         #successScreen h1 {
+
             font-size: 38px;
         }
 
+
         .success-date {
+
             color: #e75480;
+
             font-size: 25px;
+
             font-weight: bold;
+
             margin: 20px 0;
         }
 
+
         .success-text {
+
             color: #555;
+
             font-size: 18px;
+
             line-height: 1.8;
         }
 
-        /* Floating hearts */
+
+        /* ==========================
+           FLOATING HEARTS
+        ========================== */
 
         .floating-heart {
+
             position: fixed;
+
             bottom: -40px;
+
             font-size: 25px;
-            animation: floatUp 8s linear infinite;
+
+            animation:
+                floatUp 8s linear infinite;
+
             opacity: 0.6;
+
             pointer-events: none;
         }
 
+
         @keyframes floatUp {
+
             0% {
+
                 transform: translateY(0);
+
                 opacity: 0;
             }
 
+
             20% {
+
                 opacity: 0.6;
             }
 
+
             100% {
+
                 transform: translateY(-110vh);
+
                 opacity: 0;
             }
+
         }
 
-        /* Confetti */
+
+        /* ==========================
+           CONFETTI
+        ========================== */
 
         .confetti {
+
             position: fixed;
+
             top: -30px;
+
             font-size: 20px;
+
             z-index: 9999;
+
             pointer-events: none;
-            animation: fall 3s linear forwards;
+
+            animation:
+                fall 3s linear forwards;
         }
+
 
         @keyframes fall {
+
             from {
-                transform: translateY(0) rotate(0deg);
+
+                transform:
+                    translateY(0)
+                    rotate(0deg);
             }
 
+
             to {
-                transform: translateY(110vh) rotate(720deg);
+
+                transform:
+                    translateY(110vh)
+                    rotate(720deg);
             }
+
         }
+
+
+        /* ==========================
+           MOBILE
+        ========================== */
 
         @media (max-width: 600px) {
 
+
             .card {
-                padding: 30px 20px;
+
+                width: 92%;
+
+                max-height: 94vh;
+
+                padding: 22px 18px;
             }
 
+
             h1 {
+
                 font-size: 30px;
             }
 
-            .message {
-                font-size: 15px;
+
+            .photo-gallery {
+
+                gap: 10px;
+
+                margin: 5px 0 15px;
             }
 
+
+            .photo-frame {
+
+                width: 135px;
+
+                height: 175px;
+            }
+
+
+            .message {
+
+                font-size: 14px;
+
+                line-height: 1.5;
+            }
+
+
             .question {
+
                 font-size: 21px;
             }
 
+
             button {
+
                 padding: 12px 22px;
+
                 font-size: 15px;
             }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <!-- Floating Hearts -->
 
-    <div class="floating-heart" style="left:5%; animation-delay:0s;">❤️</div>
-    <div class="floating-heart" style="left:20%; animation-delay:2s;">💕</div>
-    <div class="floating-heart" style="left:40%; animation-delay:4s;">💗</div>
-    <div class="floating-heart" style="left:65%; animation-delay:1s;">❤️</div>
-    <div class="floating-heart" style="left:85%; animation-delay:3s;">💕</div>
+    <!-- ==========================
+         FLOATING HEARTS
+    ========================== -->
+
+    <div
+        class="floating-heart"
+        style="left:5%; animation-delay:0s;"
+    >
+        ❤️
+    </div>
 
 
-    <!-- Main Card -->
+    <div
+        class="floating-heart"
+        style="left:20%; animation-delay:2s;"
+    >
+        💕
+    </div>
+
+
+    <div
+        class="floating-heart"
+        style="left:40%; animation-delay:4s;"
+    >
+        💗
+    </div>
+
+
+    <div
+        class="floating-heart"
+        style="left:65%; animation-delay:1s;"
+    >
+        ❤️
+    </div>
+
+
+    <div
+        class="floating-heart"
+        style="left:85%; animation-delay:3s;"
+    >
+        💕
+    </div>
+
+
+
+    <!-- ==========================
+         MAIN CARD
+    ========================== -->
 
     <div class="card">
 
-        <!-- Invitation -->
+
+        <!-- ==========================
+             INVITATION SCREEN
+        ========================== -->
 
         <div id="invitationScreen">
+
 
             <div class="heart">
                 ❤️
             </div>
 
+
             <h1>
                 Hey Shruti ❤️
             </h1>
 
+
+            <!-- ==========================
+                 SHRUTI PHOTOS
+            ========================== -->
+
+            <div class="photo-gallery">
+
+
+                <div class="photo-frame">
+
+                    <img
+                        src="shruti1.jpg"
+                        alt="Shruti ❤️"
+                    >
+
+                </div>
+
+
+                <div class="photo-frame">
+
+                    <img
+                        src="shruti2.jpg"
+                        alt="Shruti ❤️"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==========================
+                 MESSAGE
+            ========================== -->
+
             <p class="message">
-                **Hey BEAUTIFUL ❤️** A month ago, I didn't know that meeting you would become something this special.Somehow, in such a short time, you became someone I look forward to, someone I think about, and someone who makes ordinary moments feel a little more beautiful.
+
+
+                <strong>Hey BEAUTIFUL ❤️</strong>
+
+
+                <br><br>
+
+
+                A month ago, I didn't know that meeting you would become something this special.
+
+
+                Somehow, in such a short time, you became someone I look forward to, someone I think about, and someone who makes ordinary moments feel a little more beautiful.
+
+
+                <br><br>
+
+
                 I just want you to know that I'm here, and I'm genuinely happy that our paths crossed.
-                          <br><br>
+
+
+                <br><br>
+
+
                 Maybe I don't have the right words to make everything you've been through disappear.
+
+
+                <br><br>
+
 
                 And honestly, I don't want to pretend that I can.
 
-                    But I can promise you one thing...
 
-               Whenever you're around me, you never have to pretend to be okay.
+                <br><br>
 
-              You can just be you.
 
-               Just you, me, some good food, lots of DARUU, lots of laughs... and a little **SUKOON**. ❤️
-                 <br><br>
+                But I can promise you one thing...
 
-                      ** DARUUU DATE? 🥂❤️**
+
+                <br><br>
+
+
+                Whenever you're around me, you never have to pretend to be okay.
+
+
+                <br><br>
+
+
+                You can just be you.
+
+
+                <br><br>
+
+
+                Just you, me, some good food, lots of DARUU, lots of laughs... and a little <strong>SUKOON</strong>. ❤️
+
+
+                <br><br>
+
+
+                <strong>DARUUU DATE? 🥂❤️</strong>
+
+
             </p>
 
+
+
+            <!-- ==========================
+                 DATE
+            ========================== -->
+
             <div class="date">
+
                 📅 10 September 2026
+
             </div>
 
+
+
+            <!-- ==========================
+                 QUESTION
+            ========================== -->
+
             <div class="question">
+
                 So... Daru Date? 🍷❤️
+
             </div>
+
+
+
+            <!-- ==========================
+                 BUTTONS
+            ========================== -->
 
             <div class="buttons">
 
+
                 <button id="yesBtn">
+
                     YES ❤️
+
                 </button>
+
 
                 <button id="noBtn">
+
                     NO 😶
+
                 </button>
 
+
             </div>
+
 
             <div id="responseMessage"></div>
 
+
         </div>
 
 
-        <!-- Success -->
+
+        <!-- ==========================
+             SUCCESS SCREEN
+        ========================== -->
 
         <div id="successScreen">
 
+
             <div class="heart">
+
                 🥂
+
             </div>
+
 
             <h1>
+
                 It's a DARUU Date! 🎉
+
+                <br>
+
                 And Its fucking on YOUUUUUUUUU
+
             </h1>
 
+
             <div class="success-date">
+
                 10 September 2026 ❤️
+
             </div>
+
 
             <p class="success-text">
 
+
                 You + Me + Drinks + Food == SUKOON
 
+
                 <br><br>
+
 
                 Good conversations.
+
                 <br>
+
+
                 Lots of laughs.
+
                 <br>
+
+
                 And absolutely no unnecessary drama. 😌
+
 
                 <br><br>
 
+
                 I love You NANU. ❤️🥂
+
+
+                <br>
+
+
                 Late Mat Krna...
+
+
             </p>
 
+
         </div>
+
 
     </div>
 
 
+
+    <!-- ==========================
+         JAVASCRIPT
+    ========================== -->
+
     <script>
+
 
         /* ==========================
            GET ELEMENTS
         ========================== */
 
-        const yesBtn = document.getElementById("yesBtn");
-        const noBtn = document.getElementById("noBtn");
+        const yesBtn =
+            document.getElementById("yesBtn");
+
+
+        const noBtn =
+            document.getElementById("noBtn");
+
 
         const responseMessage =
             document.getElementById("responseMessage");
 
+
         const invitationScreen =
             document.getElementById("invitationScreen");
 
+
         const successScreen =
             document.getElementById("successScreen");
+
 
 
         /* ==========================
@@ -367,6 +841,7 @@
         ];
 
 
+
         const buttonTexts = [
 
             "Really? 🥺",
@@ -387,72 +862,99 @@
 
             "Nooo 😩",
 
-            
             "chl acha 2 bache hi krenge",
+
             "abto mann jaaaaa",
-            "Sukoon nhi chaheyea tujh ❤️",
+
+            "Sukoon nhi chaheyea tujh ❤️"
 
         ];
 
 
+
         let noClicks = 0;
+
 
 
         /* ==========================
            YES BUTTON
         ========================== */
 
-        yesBtn.addEventListener("click", function() {
+        yesBtn.addEventListener(
+            "click",
+            function() {
 
-            invitationScreen.style.display = "none";
 
-            successScreen.style.display = "block";
+                invitationScreen.style.display =
+                    "none";
 
-            createConfetti();
 
-        });
+                successScreen.style.display =
+                    "block";
+
+
+                createConfetti();
+
+            }
+        );
+
 
 
         /* ==========================
            NO BUTTON
         ========================== */
 
-        noBtn.addEventListener("click", function() {
-
-            /* Show message */
-
-            responseMessage.innerText =
-                messages[noClicks % messages.length];
+        noBtn.addEventListener(
+            "click",
+            function() {
 
 
-            /* Change button text */
+                /* Show message */
 
-            noBtn.innerText =
-                buttonTexts[
+                responseMessage.innerText =
+                    messages[
+                        noClicks % messages.length
+                    ];
+
+
+
+                /* Change button text */
+
+                noBtn.innerText =
+                    buttonTexts[
+                        Math.min(
+                            noClicks,
+                            buttonTexts.length - 1
+                        )
+                    ];
+
+
+
+                /* Move button */
+
+                moveNoButton();
+
+
+
+                /* Make YES bigger */
+
+                let scale =
+                    1 +
                     Math.min(
-                        noClicks,
-                        buttonTexts.length - 1
-                    )
-                ];
+                        noClicks * 0.05,
+                        0.30
+                    );
 
 
-            /* Move button */
-
-            moveNoButton();
-
-
-            /* Make YES bigger */
-
-            let scale =
-                1 + Math.min(noClicks * 0.05, 0.30);
-
-            yesBtn.style.transform =
-                "scale(" + scale + ")";
+                yesBtn.style.transform =
+                    "scale(" + scale + ")";
 
 
-            noClicks++;
+                noClicks++;
 
-        });
+            }
+        );
+
 
 
         /* ==========================
@@ -461,19 +963,25 @@
 
         function moveNoButton() {
 
+
             /*
-             * IMPORTANT:
              * Fixed positioning means the button
              * moves relative to the browser screen.
              */
 
-            noBtn.style.position = "fixed";
+            noBtn.style.position =
+                "fixed";
 
 
             /* Get current button size */
 
-            const width = noBtn.offsetWidth;
-            const height = noBtn.offsetHeight;
+            const width =
+                noBtn.offsetWidth;
+
+
+            const height =
+                noBtn.offsetHeight;
+
 
 
             /* Keep button away from edges */
@@ -481,13 +989,20 @@
             const padding = 20;
 
 
+
             /* Calculate safe screen area */
 
             const maxX =
-                window.innerWidth - width - padding;
+                window.innerWidth -
+                width -
+                padding;
+
 
             const maxY =
-                window.innerHeight - height - padding;
+                window.innerHeight -
+                height -
+                padding;
+
 
 
             /* Generate random coordinates */
@@ -495,35 +1010,53 @@
             const x =
                 Math.floor(
                     Math.random() *
-                    Math.max(maxX - padding, 1)
+                    Math.max(
+                        maxX - padding,
+                        1
+                    )
                 ) + padding;
 
 
             const y =
                 Math.floor(
                     Math.random() *
-                    Math.max(maxY - padding, 1)
+                    Math.max(
+                        maxY - padding,
+                        1
+                    )
                 ) + padding;
+
 
 
             /* Move button */
 
-            noBtn.style.left = x + "px";
-            noBtn.style.top = y + "px";
+            noBtn.style.left =
+                x + "px";
+
+
+            noBtn.style.top =
+                y + "px";
+
 
 
             /* Small bounce */
 
-            noBtn.style.transform = "scale(1.15)";
+            noBtn.style.transform =
+                "scale(1.15)";
 
 
-            setTimeout(function() {
+            setTimeout(
+                function() {
 
-                noBtn.style.transform = "scale(1)";
+                    noBtn.style.transform =
+                        "scale(1)";
 
-            }, 200);
+                },
+                200
+            );
 
         }
+
 
 
         /* ==========================
@@ -532,7 +1065,9 @@
 
         function createConfetti() {
 
+
             const emojis = [
+
                 "❤️",
                 "💕",
                 "💗",
@@ -540,16 +1075,26 @@
                 "🥂",
                 "✨",
                 "💖"
+
             ];
 
 
-            for (let i = 0; i < 80; i++) {
+
+            for (
+                let i = 0;
+                i < 80;
+                i++
+            ) {
+
 
                 const piece =
-                    document.createElement("div");
+                    document.createElement(
+                        "div"
+                    );
 
 
-                piece.className = "confetti";
+                piece.className =
+                    "confetti";
 
 
                 piece.innerText =
@@ -561,32 +1106,49 @@
                     ];
 
 
+
                 piece.style.left =
-                    Math.random() * 100 + "vw";
+                    Math.random() *
+                    100 +
+                    "vw";
 
 
                 piece.style.animationDuration =
-                    (2 + Math.random() * 3) + "s";
+                    (
+                        2 +
+                        Math.random() * 3
+                    ) +
+                    "s";
 
 
                 piece.style.animationDelay =
-                    Math.random() + "s";
+                    Math.random() +
+                    "s";
 
 
-                document.body.appendChild(piece);
+                document.body.appendChild(
+                    piece
+                );
 
 
-                setTimeout(function() {
 
-                    piece.remove();
+                setTimeout(
+                    function() {
 
-                }, 6000);
+                        piece.remove();
+
+                    },
+                    6000
+                );
 
             }
 
         }
 
+
     </script>
 
+
 </body>
+
 </html>
