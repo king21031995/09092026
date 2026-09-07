@@ -762,6 +762,43 @@
 
         }
 
+        /* ==========================
+           HUMDARD MUSIC
+        ========================== */
+
+        .music-box {
+            margin: 12px auto 18px;
+            padding: 10px 14px;
+            background: #fff7fa;
+            border-radius: 18px;
+            max-width: 360px;
+        }
+
+        #musicBtn {
+            background: #d6336c;
+            color: white;
+            padding: 11px 20px;
+            font-size: 15px;
+            box-shadow: 0 5px 14px rgba(214,51,108,0.25);
+        }
+
+        .music-note {
+            margin-top: 7px;
+            color: #888;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .music-box {
+                margin: 8px auto 14px;
+            }
+
+            #musicBtn {
+                padding: 10px 17px;
+                font-size: 14px;
+            }
+        }
+
     </style>
 
 </head>
@@ -861,6 +898,19 @@
             </div>
 
 
+
+
+            <!-- HUMDARD MUSIC -->
+            <audio id="humdardAudio" src="Humdard.mp3" preload="auto"></audio>
+
+            <div class="music-box">
+                <button id="musicBtn" type="button">
+                    🎵 Play Humdard ❤️
+                </button>
+                <div class="music-note">
+                    Play this while you read... ❤️
+                </div>
+            </div>
 
             <!-- MESSAGE -->
 
@@ -1050,6 +1100,53 @@
             document.getElementById(
                 "successScreen"
             );
+
+        /* ==========================
+           HUMDARD MUSIC
+        ========================== */
+
+        const musicBtn =
+            document.getElementById("musicBtn");
+
+        const humdardAudio =
+            document.getElementById("humdardAudio");
+
+        musicBtn.addEventListener(
+            "click",
+            function() {
+
+                if (humdardAudio.paused) {
+
+                    humdardAudio.play()
+                        .then(function() {
+                            musicBtn.innerText =
+                                "⏸️ Pause Humdard";
+                        })
+                        .catch(function(error) {
+                            console.log(
+                                "Audio could not start:",
+                                error
+                            );
+                        });
+
+                } else {
+
+                    humdardAudio.pause();
+
+                    musicBtn.innerText =
+                        "🎵 Play Humdard ❤️";
+                }
+            }
+        );
+
+        humdardAudio.addEventListener(
+            "ended",
+            function() {
+                musicBtn.innerText =
+                    "🎵 Play Humdard ❤️";
+            }
+        );
+
 
 
 
